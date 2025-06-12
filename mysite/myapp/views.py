@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
+from django.contrib.auth import authenticate, login, logout
 
 from .models import *
 from .serializers import *
@@ -93,6 +97,15 @@ class ProductDetailView(APIView):
     
 
 
-# Template 
+####################################################### Template 
 def base_view(request):
     return render(request, 'base.html')
+
+
+class SetupItemView(View):
+    def get(self, request):
+        itemlist = Product.objects.all()
+        categorylist = Category.objects.all()
+        context = {'itemlist':itemlist, 'categorylist':categorylist}
+        return render(request, 'setup_item.html', context)
+        

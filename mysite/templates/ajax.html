@@ -1,0 +1,71 @@
+<script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+            $('#cartview').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+        // new DataTable('#example');
+    </script>
+
+
+<script>
+
+    // Create New Category 
+    function crateCategory() {
+    let name = prompt("Create New Category :", "");
+    console.log(name);
+    $.ajax({
+                url: '/api/categories/',
+                method: 'POST',
+                data: JSON.stringify({ name: name }),
+                contentType: 'application/json',
+                success: function(response) {
+                    alert('Create Category Successfully')
+                     location.reload();
+                },
+                error: function(){
+                    console.log('eror');
+                }
+            });
+        }//end category create
+
+    $("#newItemForm").on('click', '#btnCreateItm', function () {
+        var currenttr = $(this).closest("#newItemForm");
+        var item_name = currenttr.find("input[name='itemname']").val();
+        var item_code = currenttr.find("input[name='itemcode']").val();
+        var item_price = currenttr.find("input[name='price']").val();
+        var cate = currenttr.find("select[name='catname']").val();
+        $.ajax({
+                url: '/api/products/',
+                method: 'POST',
+                data: JSON.stringify({ name: item_name, productcode:item_code, price:item_price, category:cate }),
+                contentType: 'application/json',
+                success: function(response) {
+                    alert('Create Item Successfully')
+                     location.reload();
+                },
+                error: function(){
+                    console.log('eror');
+                }
+            });
+        }
+        
+    );
+        
+
+</script>

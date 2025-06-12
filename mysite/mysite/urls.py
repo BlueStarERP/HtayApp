@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/pro/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
 
     path('base/', base_view, name='base'),
+    path('SetupItemView/', SetupItemView.as_view(), name='SetupItemView'),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
