@@ -109,3 +109,9 @@ class SetupItemView(View):
         context = {'itemlist':itemlist, 'categorylist':categorylist}
         return render(request, 'setup_item.html', context)
         
+class POSView(View):
+    def get(self, request):
+        itemlist = Product.objects.all()
+        categorylist = Category.objects.all()
+        context = {'itemlist':itemlist, 'categorylist':categorylist}
+        return render(request, 'pos.html', context)

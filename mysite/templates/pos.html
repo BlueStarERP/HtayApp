@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Items{% endblock %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+<div class="grid grid-cols-12 gap-4">
+    <!-- <div class="col-span-4">01</div> -->
+    <!-- <div class="col-span-2 col-start-1 col-end-7 ...">03</div>
+  <div class="col-span-2 col-start-8 col-end-12 ...">03</div> -->
+
+    <div class="col-start-1 col-end-9">
+        
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <table id="example" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                
+                <th scope="col" class="px-6 py-3">
+                    Item Code
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Item Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Qty
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Apple MacBook Pro 17"
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                    Laptop
+                </td>
+                
+                <td class="px-6 py-4">
+                    $2999
+                </td>
+                <td class="px-6 py-4">
+                    3.0 lb.
+                </td>
+                <td class="flex items-center px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                </td>
+            </tr>
+
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Microsoft Surface Pro
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                    Laptop PC
+                </td>
+                
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4">
+                    <input type="number" class="w-20 border border-gray-300" id="">
+                </td>
+                <td class="flex items-center px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+    </div>
+
+<div class="col-start-9 col-end-12">
+    
+
+<div class="w-full p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
+        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            View all
+        </a>
+   </div>
+   <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                    
+                    <div class="flex-1 min-w-0 ms-4">
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            Neil Sims
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            email@windster.com
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        $320
+                    </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center ">
+                    
+                    <div class="flex-1 min-w-0 ms-4">
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            Bonnie Green
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            email@windster.com
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        $3467
+                    </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                    
+                    <div class="flex-1 min-w-0 ms-4">
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            Michael Gough
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            email@windster.com
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        $67
+                    </div>
+                </div>
+            </li>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center ">
+                    
+                    <div class="flex-1 min-w-0 ms-4">
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            Lana Byrd
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            email@windster.com
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        $3670000
+                    </div>
+                </div>
+            </li>
+            
+        </ul>
+   </div>
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
