@@ -55,6 +55,7 @@
    </li>
                 `);
             });
+                $('#cart-total').text(total); // Update total amount
             }
 
             // renderCart();
@@ -82,19 +83,29 @@
             cart = []; // Empty the cart array
             saveCart();
             renderCart();
-            // alert('Cart cleared!');
+            
         }
     });
+    renderCart();
+            // Checkout button
+            $('#checkout-btn').on('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
 
+                // Here you can implement the checkout logic, e.g., sending the cart to the server
 
-
-
-
-
+                
+                alert('Checkout successful! Total: ' + $('#cart-total').text());
+                cart = []; // Clear the cart after checkout
+                saveCart();
+                renderCart();
+            });
 
 
         });
-        // new DataTable('#example');
+        // end Ready Function
     </script>
 
 

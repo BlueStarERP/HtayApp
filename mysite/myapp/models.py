@@ -21,3 +21,21 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+
+class Cart(models.Model):
+    total = models.PositiveIntegerField(default=0)
+    date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.created_at} - {self.total}"
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.PositiveIntegerField(default=0)  # Store the price at the time of adding to cart
+
+    def __str__(self):
+        return f"{self.product.name} - {self.quantity} pcs"

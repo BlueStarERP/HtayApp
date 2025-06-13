@@ -115,3 +115,19 @@ class POSView(View):
         categorylist = Category.objects.all()
         context = {'itemlist':itemlist, 'categorylist':categorylist}
         return render(request, 'pos.html', context)
+    
+class SaveOrderView(View):
+    def post(self, request):
+        
+        return JsonResponse({'message': 'Order saved successfully!'})
+        # order = Order()
+        # order.customer_name = request.POST.get('customer_name')
+        # order.total_amount = request.POST.get('total_amount')
+        # order.save()
+        
+        # items = request.POST.getlist('items[]')
+        # for item in items:
+        #     product = Product.objects.get(id=item)
+        #     order.items.add(product)
+        
+        # return redirect('pos')  # Redirect to POS view after saving the order
