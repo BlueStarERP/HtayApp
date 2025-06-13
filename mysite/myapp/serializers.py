@@ -7,6 +7,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class ProductSerializer(serializers.ModelSerializer):
+    # category_id = serializers.StringRelatedField()
     # category = CategorySerializer(read_only=True)
 
     class Meta:

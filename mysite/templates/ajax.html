@@ -18,12 +18,150 @@
                 "autoWidth": false,
                 "responsive": true
             });
+
+
+            // localStorage
+            // Initialize cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+
+            // Function to save cart to localStorage
+            function saveCart() {
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            }
+
+            function renderCart() {
+                $('#cart-items').empty(); // Clear existing items
+                let total = 0;
+
+                cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                $('#cart-items').append(`
+                    <li class="pb-3 sm:pb-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         
+         <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+               ${item.name}
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               ${item.price} x ${item.quantity}
+            </p>
+         </div>
+         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            ${itemTotal }
+         </div>
+      </div>
+   </li>
+                `);
+            });
+            }
+
+            // renderCart();
+            $('.add-to-cart').on('click', function() {
+                const productDiv = $(this).closest('.product');
+                const productId = productDiv.data('id');
+                const productName = productDiv.data('name');
+                const productPrice = productDiv.data('price');
+                const productQty = productDiv.find("input[name='pQty']").val();
+                // alert(productQty);
+                cart.push({
+                id: productId,
+                name: productName,
+                price: productPrice,
+                quantity: productQty
+            });
+            saveCart();
+            renderCart();
+            });
+
+
+//Clear Cart
+            $('#clear-cart').on('click', function() {
+        if (confirm('Are you sure you want to clear your cart?')) {
+            cart = []; // Empty the cart array
+            saveCart();
+            renderCart();
+            // alert('Cart cleared!');
+        }
+    });
+
+
+
+
+
+
+
+
         });
         // new DataTable('#example');
     </script>
 
 
 <script>
+
+    //Category List
+    $.ajax({
+        url: '/api/categories/',
+        method: 'GET',
+        success: function(response) {
+                    $('#CategoryListDropdown').empty();
+                    console.log(response);
+                    response.forEach(function(i) {
+                        $('#CategoryListDropdown').append(`
+                           
+                            <li class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-blue-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                                ${i.name}
+                            </li>
+                        `);
+                    });
+                },
+        error:function(){
+            alert('error');
+        }
+    });
+
+    // $.ajax({
+    //     url: '/api/products/',
+    //     method: 'GET',
+    //     success: function(response) {
+    //                 $('#ItemListTblbody').empty();
+    //                 console.log(response);
+    //                 response.forEach(function(i) {
+    //                     $('#ItemListTblbody').append(`
+                           
+    //                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                
+    //             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    //                 ${i.productcode}
+    //             </th>
+    //             <td class="px-6 py-4">
+    //                 ${i.category}
+    //             </td>
+    //             <td class="px-6 py-4">
+    //                 ${i.name}
+    //             </td>
+                
+    //             <td class="px-6 py-4">
+    //                 ${i.price}
+    //             </td>
+    //             <td class="px-6 py-4">
+    //                 <input type="number" class="w-20 border border-blue-700 rounded-lg px-2" value="1">
+    //             </td>
+    //             <td class="flex items-center px-6 py-4">
+                    
+    //                 <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-1 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ADD</button>
+    //             </td>
+    //         </tr>
+    //                     `);
+    //                 });
+    //             },
+    //     error:function(){
+    //         alert('error၁၂၃');
+    //     }
+    // });
+
+
 
     // Create New Category 
     function crateCategory() {

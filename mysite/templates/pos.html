@@ -7,182 +7,158 @@
 
 
 
-
-
-
-
-
-<div class="grid grid-cols-12 gap-4">
+<div class="flex grid grid-cols-12 gap-2 mt-4">
     <!-- <div class="col-span-4">01</div> -->
     <!-- <div class="col-span-2 col-start-1 col-end-7 ...">03</div>
   <div class="col-span-2 col-start-8 col-end-12 ...">03</div> -->
 
+
     <div class="col-start-1 col-end-9">
-        
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <table id="example" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                
-                <th scope="col" class="px-6 py-3">
-                    Item Code
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Item Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Category
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Qty
-                </th>
-                
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    3.0 lb.
-                </td>
-                <td class="flex items-center px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
-                </td>
-            </tr>
 
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">
-                    White
-                </td>
-                <td class="px-6 py-4">
-                    Laptop PC
-                </td>
-                
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-                <td class="px-6 py-4">
-                    <input type="number" class="w-20 border border-gray-300" id="">
-                </td>
-                <td class="flex items-center px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
-                </td>
-            </tr>
-            
-        </tbody>
-    </table>
-</div>
+        <div
+            class="relative overflow-x-auto shadow-md sm:rounded-lg w-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+
+            <!-- dropdown -->
+
+            <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">Category<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdownDivider"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                <ul id="CategoryListDropdown" class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDividerButton">
+
+                    <!-- <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+      </li> -->
+
+                </ul>
+
+            </div>
+
+
+
+            <table id="example" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+
+                        <th scope="col" class="px-6 py-3">
+                            Item Code
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Item Name
+                        </th>
+
+                        <th scope="col" class="px-6 py-3">
+                            Price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Qty
+                        </th>
+
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="ItemListTblbody">
+
+
+                    {% for i in itemlist %}
+
+                    <tr
+                        class="product bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+                        data-id="{{i.id}}"
+                        data-name="{{i.name}}"
+                        data-price="{{i.price}}"
+                        >
+
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{i.productcode}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{i.category}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{i.name}}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{i.price}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <input name="pQty" type="number" class="w-20 border border-blue-700 rounded-lg px-2" value="1">
+                        </td>
+                        <td class="flex items-center px-6 py-4">
+
+                            <button type="button"
+                                class="add-to-cart text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-1 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ADD</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
-<div class="col-start-9 col-end-12">
-    
 
-<div class="w-full p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
-        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            View all
-        </a>
-   </div>
-   <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                    
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Neil Sims
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center ">
-                    
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Bonnie Green
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                    
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Michael Gough
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
-                    </div>
-                </div>
-            </li>
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center ">
-                    
-                    <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Lana Byrd
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3670000
-                    </div>
-                </div>
-            </li>
+
+
+
+<div class="col-start-9 col-end-12 px-2">
+
+
+       <div class="mb-2">
+            <label for="customer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Name</label>
+            <input type="text" id="customer_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="U Ba" />
+        </div>
+        <div>
             
-        </ul>
-   </div>
-</div>
+<ul id="cart-items" class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
 
-</div>
+   
+
+   <li class="pb-3 sm:pb-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         
+         <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+               Total Amount
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              
+            </p>
+         </div>
+         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            0
+         </div>
+      </div>
+   </li>
+
+   
+   
+
+</ul>
+<div>
+    <button type="button" id="clear-cart" class="text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Clear Cart</button>
+   </div>
+
+        </div>
+
+    </div>
 
 
 </div>
