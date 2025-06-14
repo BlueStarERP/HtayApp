@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Cart, CartItem
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
@@ -12,5 +12,19 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
     readonly_fields = ('created_at', 'updated_at')
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'total', 'date', 'created_at', 'updated_at')
+    search_fields = ('date',)
+    readonly_fields = ('created_at', 'updated_at')
+
+
+
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'cart', 'product', 'quantity', 'price')
+    search_fields = ('cart__id', 'product__name')
+    list_filter = ('cart', 'product')
+    
+admin.site.register(CartItem, CartItemAdmin)
+admin.site.register(Cart, CartAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)

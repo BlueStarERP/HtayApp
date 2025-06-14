@@ -101,10 +101,10 @@
             // Here you can implement the checkout logic, e.g., sending the cart to the server
 
 
-            alert('Checkout successful! Total: ' + $('#cart-total').text());
-            cart = []; // Clear the cart after checkout
-            saveCart();
-            renderCart();
+            // alert('Checkout successful! Total: ' + $('#cart-total').text());
+            // cart = []; // Clear the cart after checkout
+            // saveCart();
+            // renderCart();
         });
 
 
@@ -116,11 +116,30 @@
             $.ajax({
                 url:'/SaveOrderView/',
                 type:'POST',
-                data:JSON.stringify(cart),
+                data:cart,
                 contentType: 'application/json',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}' // Ensure you have the CSRF token for POST requests
+                },
+                dataType: 'json',
+                // beforeSend: function(xhr, settings) {
+                //     xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                // },
+                // data: JSON.stringify(cart),
+                // contentType: 'application/json',
+                // dataType: 'json',
+                // headers: {
+                //     'X-CSRFToken': '{{ csrf_token }}' // Ensure you have the CSRF token for POST requests        
+                // },
+                // data: JSON.stringify(cart),
+
+
 
                 success:function(){
-                    alert('hello success')
+                    alert('Invoice Save Successfully')
+                    localStorage.removeItem('shoppingCart'); // Clear cart from localStorage
+                    location.reload(); // Reload the page to reflect changes
+
                 },
                error: function () {
                     alert('error');

@@ -119,8 +119,22 @@ class POSView(View):
     
 class SaveOrderView(View):
     def post(self, request):
-        print('helloo')
-        print(request.body)
+        json_data = request.body
+        data = json.loads(json_data)
+        # print(type(data))
+        # print(data)
+        cart = Cart.objects.create(total=0)  # Create a new cart instance
+        for item in data:
+            product_id = int(item['id'])
+            quantity = int(item['quantity'])
+            price = int(item['price'])
+            print(f"Product ID: {product_id}, Quantity: {quantity}, Price: {price}")
+            product = Product.objects.get(id=product_id)
+            cart_item = CartItem.objects.create(cart=cart, product=product, quantity=quantity, price=price)
+            cart.total += cart_item.price * cart_item.quantity
         
+        cart.save()  # Save the cart with the updated total
+        
+
         return JsonResponse({'message': 'Order saved successfully!'})
         
