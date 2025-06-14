@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
 from django.contrib.auth import authenticate, login, logout
+import json
 
 from .models import *
 from .serializers import *
@@ -118,16 +119,8 @@ class POSView(View):
     
 class SaveOrderView(View):
     def post(self, request):
+        print('helloo')
+        print(request.body)
         
         return JsonResponse({'message': 'Order saved successfully!'})
-        # order = Order()
-        # order.customer_name = request.POST.get('customer_name')
-        # order.total_amount = request.POST.get('total_amount')
-        # order.save()
         
-        # items = request.POST.getlist('items[]')
-        # for item in items:
-        #     product = Product.objects.get(id=item)
-        #     order.items.add(product)
-        
-        # return redirect('pos')  # Redirect to POS view after saving the order

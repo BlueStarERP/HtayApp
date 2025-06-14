@@ -1,39 +1,39 @@
 <script>
-        $(document).ready(function () {
-            $('#example').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            });
-            $('#cartview').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            });
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+        $('#cartview').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
 
 
-            // localStorage
-            // Initialize cart from localStorage
-            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        // localStorage
+        // Initialize cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
-            // Function to save cart to localStorage
-            function saveCart() {
+        // Function to save cart to localStorage
+        function saveCart() {
             localStorage.setItem('shoppingCart', JSON.stringify(cart));
-            }
+        }
 
-            function renderCart() {
-                $('#cart-items').empty(); // Clear existing items
-                let total = 0;
+        function renderCart() {
+            $('#cart-items').empty(); // Clear existing items
+            let total = 0;
 
-                cart.forEach(item => {
+            cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 $('#cart-items').append(`
@@ -49,24 +49,24 @@
             </p>
          </div>
          <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            ${itemTotal }
+            ${itemTotal}
          </div>
       </div>
    </li>
                 `);
             });
-                $('#cart-total').text(total); // Update total amount
-            }
+            $('#cart-total').text(total); // Update total amount
+        }
 
-            // renderCart();
-            $('.add-to-cart').on('click', function() {
-                const productDiv = $(this).closest('.product');
-                const productId = productDiv.data('id');
-                const productName = productDiv.data('name');
-                const productPrice = productDiv.data('price');
-                const productQty = productDiv.find("input[name='pQty']").val();
-                // alert(productQty);
-                cart.push({
+        // renderCart();
+        $('.add-to-cart').on('click', function () {
+            const productDiv = $(this).closest('.product');
+            const productId = productDiv.data('id');
+            const productName = productDiv.data('name');
+            const productPrice = productDiv.data('price');
+            const productQty = productDiv.find("input[name='pQty']").val();
+            // alert(productQty);
+            cart.push({
                 id: productId,
                 name: productName,
                 price: productPrice,
@@ -74,39 +74,65 @@
             });
             saveCart();
             renderCart();
-            });
+        });
 
 
-//Clear Cart
-            $('#clear-cart').on('click', function() {
-        if (confirm('Are you sure you want to clear your cart?')) {
-            cart = []; // Empty the cart array
-            saveCart();
-            renderCart();
-            
-        }
-    });
-    renderCart();
-            // Checkout button
-            $('#checkout-btn').on('click', function() {
-                if (cart.length === 0) {
-                    alert('Your cart is empty!');
-                    return;
-                }
-
-                // Here you can implement the checkout logic, e.g., sending the cart to the server
-
-                
-                alert('Checkout successful! Total: ' + $('#cart-total').text());
-                cart = []; // Clear the cart after checkout
+        //Clear Cart
+        $('#clear-cart').on('click', function () {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = []; // Empty the cart array
                 saveCart();
                 renderCart();
-            });
 
-
+            }
         });
-        // end Ready Function
-    </script>
+        renderCart();
+        // Checkout button
+        $('#checkout-btn').on('click', function () {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            sendCart()
+
+            
+            
+
+            // Here you can implement the checkout logic, e.g., sending the cart to the server
+
+
+            alert('Checkout successful! Total: ' + $('#cart-total').text());
+            cart = []; // Clear the cart after checkout
+            saveCart();
+            renderCart();
+        });
+
+
+
+        // Function to send cart data to Django
+        function sendCart(){
+            // alert('hello send cart fun');
+            const cart = localStorage.getItem('shoppingCart'); 
+            $.ajax({
+                url:'/SaveOrderView/',
+                type:'POST',
+                data:JSON.stringify(cart),
+                contentType: 'application/json',
+
+                success:function(){
+                    alert('hello success')
+                },
+               error: function () {
+                    alert('error');
+                }
+            });
+            
+        }
+
+
+    });
+    // end Ready Function
+</script>
 
 
 <script>
@@ -115,19 +141,19 @@
     $.ajax({
         url: '/api/categories/',
         method: 'GET',
-        success: function(response) {
-                    $('#CategoryListDropdown').empty();
-                    console.log(response);
-                    response.forEach(function(i) {
-                        $('#CategoryListDropdown').append(`
+        success: function (response) {
+            $('#CategoryListDropdown').empty();
+            console.log(response);
+            response.forEach(function (i) {
+                $('#CategoryListDropdown').append(`
                            
                             <li class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-blue-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
                                 ${i.name}
                             </li>
                         `);
-                    });
-                },
-        error:function(){
+            });
+        },
+        error: function () {
             alert('error');
         }
     });
@@ -140,9 +166,9 @@
     //                 console.log(response);
     //                 response.forEach(function(i) {
     //                     $('#ItemListTblbody').append(`
-                           
+
     //                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                
+
     //             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
     //                 ${i.productcode}
     //             </th>
@@ -152,7 +178,7 @@
     //             <td class="px-6 py-4">
     //                 ${i.name}
     //             </td>
-                
+
     //             <td class="px-6 py-4">
     //                 ${i.price}
     //             </td>
@@ -160,7 +186,7 @@
     //                 <input type="number" class="w-20 border border-blue-700 rounded-lg px-2" value="1">
     //             </td>
     //             <td class="flex items-center px-6 py-4">
-                    
+
     //                 <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-1 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ADD</button>
     //             </td>
     //         </tr>
@@ -176,22 +202,22 @@
 
     // Create New Category 
     function crateCategory() {
-    let name = prompt("Create New Category :", "");
-    // console.log(name);
-    $.ajax({
-                url: '/api/categories/',
-                method: 'POST',
-                data: JSON.stringify({ name: name }),
-                contentType: 'application/json',
-                success: function(response) {
-                    alert('Create Category Successfully')
-                     location.reload();
-                },
-                error: function(){
-                    console.log('eror');
-                }
-            });
-        }//end category create
+        let name = prompt("Create New Category :", "");
+        // console.log(name);
+        $.ajax({
+            url: '/api/categories/',
+            method: 'POST',
+            data: JSON.stringify({ name: name }),
+            contentType: 'application/json',
+            success: function (response) {
+                alert('Create Category Successfully')
+                location.reload();
+            },
+            error: function () {
+                console.log('eror');
+            }
+        });
+    }//end category create
 
     $("#newItemForm").on('click', '#btnCreateItm', function () {
         var currenttr = $(this).closest("#newItemForm");
@@ -200,21 +226,21 @@
         var item_price = currenttr.find("input[name='price']").val();
         var cate = currenttr.find("select[name='catname']").val();
         $.ajax({
-                url: '/api/products/',
-                method: 'POST',
-                data: JSON.stringify({ name: item_name, productcode:item_code, price:item_price, category:cate }),
-                contentType: 'application/json',
-                success: function(response) {
-                    alert('Create Item Successfully')
-                     location.reload();
-                },
-                error: function(){
-                    console.log('eror');
-                }
-            });
-        }
-        
+            url: '/api/products/',
+            method: 'POST',
+            data: JSON.stringify({ name: item_name, productcode: item_code, price: item_price, category: cate }),
+            contentType: 'application/json',
+            success: function (response) {
+                alert('Create Item Successfully')
+                location.reload();
+            },
+            error: function () {
+                console.log('eror');
+            }
+        });
+    }
+
     );
-        
+
 
 </script>
