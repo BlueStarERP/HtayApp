@@ -153,3 +153,13 @@ class SaveOrderView(View):
 
         return JsonResponse({'message': 'Order saved successfully!'})
         
+class CartItemDetailView(View):
+    def get(self, request, pk):
+        try:
+            cart = Cart.objects.get(id=pk)
+            cart_items = CartItem.objects.filter(cart=cart)
+            return render(request, 'invoice_detail.html', {'cart': cart, 'cart_items': cart_items})
+            # serializer = CartItemSerializer(cart_items, many=True)
+            # return JsonResponse(serializer.data, safe=False)
+        except Cart.DoesNotExist:
+            return JsonResponse({'error': 'Cart not found'}, status=404)

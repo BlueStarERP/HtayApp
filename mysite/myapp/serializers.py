@@ -17,3 +17,15 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['id', 'date', 'total']
         read_only_fields = ['date']
+
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    class Meta:
+        model = CartItem
+        fields = ['id', 'cart', 'product', 'quantity', 'price']
+        read_only_fields = ['price']
+        extra_kwargs = {
+            'cart': {'write_only': True},
+            'product': {'write_only': True}
+        }
+        

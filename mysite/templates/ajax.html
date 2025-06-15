@@ -270,5 +270,18 @@
 
     );
 
+    function printTable() {
+	var el=document.getElementById("toPrint");
+	el.setAttribute('border', '1');
+	el.setAttribute('cellpadding', '5');
+    el.setAttribute('cellspacing', '2');
+    el.setAttribute('width', '100%');
+    
+	newPrint=window.open("");
+	newPrint.document.write(el.outerHTML);
+	newPrint.print();
+	newPrint.close();
+}
+
 
 </script>
