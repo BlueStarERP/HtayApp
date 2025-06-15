@@ -7,10 +7,13 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class ProductSerializer(serializers.ModelSerializer):
-    # category_id = serializers.StringRelatedField()
-    # category = CategorySerializer(read_only=True)
-
     class Meta:
         model = Product
         fields = ['id', 'name', 'productcode', 'description', 'price', 'stock', 'category', 'image', 'created_at', 'updated_at']
         read_only_fields = ['created_at', 'updated_at']
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['id', 'date', 'total']
+        read_only_fields = ['date']

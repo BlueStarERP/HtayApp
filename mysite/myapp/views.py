@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
 from django.contrib.auth import authenticate, login, logout
 import json
+import datetime
 
 from .models import *
 from .serializers import *
@@ -33,7 +34,20 @@ class CategoryViewSet(viewsets.ModelViewSet):
         if search:
             queryset = queryset.filter(name__icontains=search)
         return queryset
-    
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+    pagination_class = None  # Disable pagination for this viewset
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search = self.request.query_params.get('search', None)
+        if search:
+            queryset = queryset.filter(name__icontains=search)
+        return queryset
+
+
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -113,8 +127,9 @@ class SetupItemView(View):
 class POSView(View):
     def get(self, request):
         itemlist = Product.objects.all()
+        today_cart = Cart.objects.filter(date=datetime.date.today())
         categorylist = Category.objects.all()
-        context = {'itemlist':itemlist, 'categorylist':categorylist}
+        context = {'itemlist':itemlist, 'categorylist':categorylist, 'today_cart':today_cart}
         return render(request, 'pos.html', context)
     
 class SaveOrderView(View):

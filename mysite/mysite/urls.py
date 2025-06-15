@@ -25,6 +25,7 @@ from myapp.views import *
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet, basename='category')
 router.register(r'products', ProductViewSet, basename='product')
+router.register(r'CartViewSet', CartViewSet, basename='CartViewSet')
 
 
 # The API URLs are now determined automatically by the router.
