@@ -44,6 +44,8 @@ urlpatterns = [
     path('', POSView.as_view(), name='POSView'),
     path('SaveOrderView/', SaveOrderView.as_view(), name='SaveOrderView'),
     path('CartItemDetailView/<int:pk>/', CartItemDetailView.as_view(), name='CartItemDetailView'),
+    path('ProductDetailView/<int:pk>/', ProductDetailView.as_view(), name='ProductDetailView'),
+    path('SaleReportView/', SaleReportView.as_view(), name='SaleReportView'),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

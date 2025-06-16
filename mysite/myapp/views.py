@@ -123,7 +123,27 @@ class SetupItemView(View):
         categorylist = Category.objects.all()
         context = {'itemlist':itemlist, 'categorylist':categorylist}
         return render(request, 'setup_item.html', context)
+
+
+class ProductDetailView(View):
+    def get(self, request, pk):
+        itm = Product.objects.get(id=pk)
+        fm = ProductEditForm(instance=itm)
+        context = {'fm':fm, 'itm':itm}
+        return render(request, 'edit_item.html', context)
+    
+    def post(self, request, pk):
+        ie = Product.objects.get(id=pk)
+        fm = ProductEditForm(request.POST,instance=ie)
+        if fm.is_valid():
+            fm.save()
+            return redirect('/SetupItemView/')
+
         
+
+
+
+
 class POSView(View):
     def get(self, request):
         itemlist = Product.objects.all()
@@ -164,3 +184,10 @@ class CartItemDetailView(View):
             return JsonResponse(serializer.data, safe=False)
         except Cart.DoesNotExist:
             return JsonResponse({'error': 'Cart not found'}, status=404)
+        
+
+class SaleReportView(View):
+    def get(self, request):
+        cart_list = Cart.objects.all()
+        context ={'cart_list':cart_list}
+        return render(request, 'SaleReportView.html', context)
