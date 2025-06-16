@@ -205,12 +205,8 @@
     
 
 
-    });
-    // end Ready Function
-</script>
 
 
-<script>
 
     //Category List
     $.ajax({
@@ -277,6 +273,7 @@
 
     // Create New Category 
     function crateCategory() {
+
         let name = prompt("Create New Category :", "");
         // console.log(name);
         $.ajax({
@@ -293,6 +290,29 @@
             }
         });
     }//end category create
+
+    $("#CreateCategoryFm").on('click', '.createCatBtn', function(){
+        var currenttr = $(this).closest("#CreateCategoryFm");
+        var name = currenttr.find("input[name='cat_name']").val();
+        
+        $.ajax({
+            url: '/api/categories/',
+            method: 'POST',
+            data: JSON.stringify({ name: name }),
+            contentType: 'application/json',
+            success: function (response) {
+                alert('Create Category Successfully')
+                location.reload();
+            },
+            error: function () {
+                console.log('eror');
+            }
+        });
+
+    });//end create create
+
+
+
 
     $("#newItemForm").on('click', '#btnCreateItm', function () {
         var currenttr = $(this).closest("#newItemForm");
@@ -331,4 +351,6 @@
 }
 
 
+    });
+    // end Ready Function
 </script>
