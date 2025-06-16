@@ -144,9 +144,10 @@ class SaveOrderView(View):
             quantity = int(item['quantity'])
             price = int(item['price'])
             print(f"Product ID: {product_id}, Quantity: {quantity}, Price: {price}")
+            amount = quantity * price
             product = Product.objects.get(id=product_id)
-            cart_item = CartItem.objects.create(cart=cart, product=product, quantity=quantity, price=price)
-            cart.total += cart_item.price * cart_item.quantity
+            cart_item = CartItem.objects.create(cart=cart, product=product, quantity=quantity, price=amount)
+            cart.total += cart_item.price
         
         cart.save()  # Save the cart with the updated total
         
@@ -158,8 +159,8 @@ class CartItemDetailView(View):
         try:
             cart = Cart.objects.get(id=pk)
             cart_items = CartItem.objects.filter(cart=cart)
-            return render(request, 'invoice_detail.html', {'cart': cart, 'cart_items': cart_items})
-            # serializer = CartItemSerializer(cart_items, many=True)
-            # return JsonResponse(serializer.data, safe=False)
+            # return render(request, 'invoice_detail.html', {'cart': cart, 'cart_items': cart_items})
+            serializer = CartItemSerializer(cart_items, many=True)
+            return JsonResponse(serializer.data, safe=False)
         except Cart.DoesNotExist:
             return JsonResponse({'error': 'Cart not found'}, status=404)
